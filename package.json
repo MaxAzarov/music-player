@@ -11,7 +11,7 @@
     "client": "cd client && cd build && npm run start",
     "server": "node server.js",
     "heroku-postbuild": " npm install --prefix client && npm install && npm run build && tsc",
-    "start": "concurrently \"npm run server\" \"npm run client\""
+    "start": "concurrently  \"npm run client\" \"npm run server\""
   },
   "engines": {
     "node": "14.10.1"
