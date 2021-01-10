@@ -33,10 +33,17 @@ server.applyMiddleware({ app });
 
 app.use(cors());
 
+const root = require("path").join(__dirname, "client", "build");
+app.use(express.static(root));
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  res.sendFile("index.html", { root });
 });
 
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+// });
+
+console.log(path.join(__dirname, "client", "build", "index.html"));
 app.use(express.static("images"));
 app.use(express.static("music"));
 

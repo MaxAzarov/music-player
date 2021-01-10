@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "https://music-player-mern.herokuapp.com/",
+  "homepage": "https://music-player-mern.herokuapp.com/",
   "dependencies": {
     "@apollo/client": "^3.3.6",
     "@testing-library/jest-dom": "^5.11.6",
