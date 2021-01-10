@@ -9,6 +9,7 @@ var mongoose_1 = __importDefault(require("mongoose"));
 var cors_1 = __importDefault(require("cors"));
 var root_1 = __importDefault(require("./graphql/typeDefs/root"));
 var root_2 = __importDefault(require("./graphql/resolvers/root"));
+var path_1 = __importDefault(require("path"));
 var app = express_1.default();
 var PORT = process.env.PORT || 5000;
 // const typeDefs = gql`
@@ -30,6 +31,9 @@ var server = new apollo_server_express_1.ApolloServer({
 });
 server.applyMiddleware({ app: app });
 app.use(cors_1.default());
+app.get("*", function (req, res) {
+    res.sendFile(path_1.default.join(__dirname, "client", "build", "index.html"));
+});
 app.use(express_1.default.static("images"));
 app.use(express_1.default.static("music"));
 mongoose_1.default

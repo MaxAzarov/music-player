@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import typeDefs from "./graphql/typeDefs/root";
 import resolvers from "./graphql/resolvers/root";
+import path from "path";
 
 const app: Application = express();
 const PORT = process.env.PORT || 5000;
@@ -31,6 +32,10 @@ const server = new ApolloServer({
 server.applyMiddleware({ app });
 
 app.use(cors());
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 app.use(express.static("images"));
 app.use(express.static("music"));
