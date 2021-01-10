@@ -11,7 +11,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:5000/graphql",
+  uri: "https://music-player-mern.herokuapp.com/graphql",
 });
 
 const client = new ApolloClient({
