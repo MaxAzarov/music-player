@@ -1,0 +1,14 @@
+.music-progress {
+  text-align: center;
+  color: #fff;
+  div {
+    display: flex;
+  }
+  meter {
+    margin: 0 10px;
+  }
+  &__duration {
+    width: 500px;
+    height: 20px;
+  }
+}

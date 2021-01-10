@@ -1,0 +1,19 @@
+.music-info {
+  &__img {
+    width: 500px;
+  }
+  &__title {
+    color: #fff;
+  }
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    img {
+      margin-right: 5px;
+    }
+  }
+}
+.visibility {
+  visibility: hidden;
+}
