@@ -83,13 +83,6 @@ const MusicManagement = ({
     setSeconds(seconds);
   };
 
-  // audio.play();
-  // myaudio.pause();
-  // myaudio.duration;
-  // myaudio.currentTime = 0;
-  // myaudio.loop = true;
-  // myaudio.muted = true;
-
   const styles = { color: "#fff", fontSize: "1.5rem", opacity: 0.7 };
   const styles2 = { color: "#fff", fontSize: "2em", opacity: 0.7 };
   const style3 = { color: "#fff", fontSize: "1.5em" };

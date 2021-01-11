@@ -1,22 +1,9 @@
-// import { gql, useQuery } from "@apollo/client";
-// import { useEffect } from "react";
 import React from "react";
 
-import "./App.scss";
 import Music from "./Music/Music";
+import "./App.scss";
 
 const App = () => {
-  // useEffect(() => {}, []);
-
-  // const query = gql`
-  //   query {
-  //     hello
-  //   }
-  // `;
-
-  // const { data } = useQuery(query);
-
-  // console.log(data);
   return (
     <div
       className="App"
@@ -24,8 +11,8 @@ const App = () => {
         backgroundImage: `url(` + require("./image1.png").default + `)`,
         backgroundPosition: "center",
         backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        height: "100vh",
+        backgroundRepeat: "repeat-y",
+        // height: "100vh",
       }}
     >
       <Music />

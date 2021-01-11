@@ -3,14 +3,28 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
 }
 .musics {
+  width: 40%;
+  @media screen and (max-width: 992px) {
+    display: flex;
+    flex-direction: column;
+    order: 2;
+  }
+  @media screen and (max-width: 500px) {
+    width: 90%;
+  }
 }
 .music {
   display: flex;
   justify-content: space-evenly;
   height: 100vh;
-  // margin: auto 0;
   align-items: center;
   align-items: center;
+
+  @media screen and (max-width: 992px) {
+    display: flex;
+    flex-direction: column;
+  }
 }

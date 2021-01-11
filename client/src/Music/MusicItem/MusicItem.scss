@@ -1,5 +1,4 @@
 .music-item {
-  width: 500px;
   display: flex;
   align-items: center;
   border-bottom: 1px solid rgba(256, 256, 256, 0.5);
@@ -8,24 +7,38 @@
     border-bottom: none;
   }
 
+  @media screen and (max-width: 992px) {
+    display: none;
+    &:first-child {
+      display: flex;
+      border-bottom: none;
+    }
+  }
+
   &__info {
     display: flex;
+    flex: 1 1 auto;
     flex-direction: column;
     justify-content: center;
   }
 
   &__wrapper {
     display: flex;
+    flex: 1 1 auto;
   }
 
   &__index {
     color: #fff;
     align-self: center;
-    margin: 0 10px 0 10px;
+    margin: 0 10px;
+    @media screen and (max-width: 992px) {
+      display: none;
+    }
   }
 
   &__name {
     color: #fff;
+    flex: 1 1 auto;
   }
 
   &__details {

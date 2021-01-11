@@ -1,6 +1,13 @@
 .music-info {
+  @media screen and (max-width: 992px) {
+    order: 1;
+  }
   &__img {
-    width: 500px;
+    display: flex;
+    max-width: 300px;
+    @media screen and (max-width: 600px) {
+      max-width: 200px;
+    }
   }
   &__title {
     color: #fff;

@@ -22,20 +22,6 @@ const MusicInfo = ({ link, name, author, album, liked, setLiked }: Props) => {
     opacity: liked,
   });
 
-  // const setLiked = () => {
-  //   setMusics((prevState) => {
-  //     prevState = [
-  //       ...prevState.map((item) => {
-  //         if (item.name === name) {
-  //           item = { ...item, liked: !item.liked };
-  //         }
-  //         return item;
-  //       }),
-  //     ];
-  //     return [...prevState];
-  //   });
-  // };
-
   return (
     <div className={style}>
       <img className="music-info__img" src={link} alt="" />

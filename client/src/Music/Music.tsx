@@ -3,8 +3,8 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import MusicInfo from "../MusicInfo/MusicInfo";
 import MusicManagement from "../MusicManagement/MusicManagement";
-import "./Music.scss";
 import MusicItem from "./MusicItem/MusicItem";
+import "./Music.scss";
 
 interface IMusic {
   name: string;
@@ -68,6 +68,22 @@ const Music = () => {
     toggleLike({ variables: { name } });
   };
 
+  const SetMusic = useCallback(
+    (index: number) => {
+      setActiveMusic({
+        name: musics[index].name,
+        author: musics[index].author,
+        album: musics[index].album,
+        liked: musics[index].liked,
+        link: musics[index].link,
+        image: musics[index].image,
+        index: index,
+      });
+      setNext(false);
+    },
+    [musics]
+  );
+
   const { data, loading } = useQuery(GetMusics);
 
   const GenerateIndex = useCallback(() => {
@@ -81,94 +97,16 @@ const Music = () => {
   }, [data, loading]);
 
   useEffect(() => {
-    console.log("shuffle", shuffle);
     if (next && shuffle) {
-      console.log(
-        "🚀 ~ file: Music.tsx ~ line 85 ~ useEffect ~ shuffle",
-        shuffle
-      );
-      // console.log(shuffle);
       let random = GenerateIndex();
-      console.log("compare:", random === activeMusic.index);
       while (activeMusic.index === random) {
-        // setActiveMusic({
-        //   name: musics[random].name,
-        //   author: musics[random].author,
-        //   album: musics[random].album,
-        //   liked: musics[random].liked,
-        //   link: musics[random].link,
-        //   image: musics[random].image,
-        //   index: random,
-        // });
-        console.log(random);
         random = GenerateIndex();
       }
-
-      console.log("setActiveMusic");
-      setActiveMusic({
-        name: musics[random].name,
-        author: musics[random].author,
-        album: musics[random].album,
-        liked: musics[random].liked,
-        link: musics[random].link,
-        image: musics[random].image,
-        index: random,
-      });
-      setNext(false);
-      // if(activeMusic.index !== random){
-      //   setActiveMusic({
-      //     name: musics[random].name,
-      //     author: musics[random].author,
-      //     album: musics[random].album,
-      //     liked: musics[random].liked,
-      //     link: musics[random].link,
-      //     image: musics[random].image,
-      //     index: random + 1,
-      //   });
-      // }
+      SetMusic(random);
     } else if (activeMusic.index && next && musics[activeMusic.index]) {
-      // next music
-      setActiveMusic({
-        name: musics[activeMusic.index].name,
-        author: musics[activeMusic.index].author,
-        album: musics[activeMusic.index].album,
-        liked: musics[activeMusic.index].liked,
-        link: musics[activeMusic.index].link,
-        image: musics[activeMusic.index].image,
-        index: activeMusic.index,
-      });
-      setNext(false);
+      SetMusic(activeMusic.index);
     }
-  }, [next, musics, activeMusic.index, shuffle, GenerateIndex]);
-
-  // const AddMusic = gql`
-  //   mutation AddMusic(
-  //     $name: String!
-  //     $link: String!
-  //     $author: String!
-  //     $album: String!
-  //     $image: String!
-  //     $liked: Boolean!
-  //   ) {
-  //     AddMusic(
-  //       name: $name
-  //       link: $link
-  //       author: $author
-  //       album: $album
-  //       liked: $liked
-  //       image: $image
-  //     ) {
-  //       name
-  //       # link
-  //       # author
-  //       # album
-  //       # liked
-  //       # image
-  //     }
-  //   }
-  // `;
-
-  // const [addMusic] = useMutation(AddMusic);
+  }, [next, musics, activeMusic.index, shuffle, GenerateIndex, SetMusic]);
 
   return (
     <div className="music-wrapper">
@@ -189,23 +127,6 @@ const Music = () => {
             ></MusicItem>
           ))}
         </div>
-        {/*
-        <button
-          onClick={() =>
-            addMusic({
-              variables: {
-                name: "Sapphire",
-                link: "Sapphire",
-                author: "Sapphire",
-                album: "Sapphire",
-                liked: false,
-                image: "Sapphire",
-              },
-            })
-          }
-        >
-          click
-        </button> */}
 
         <MusicInfo
           link={activeMusic.image}

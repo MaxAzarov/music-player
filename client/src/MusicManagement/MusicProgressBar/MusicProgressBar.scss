@@ -4,11 +4,12 @@
   div {
     display: flex;
   }
-  meter {
-    margin: 0 10px;
-  }
   &__duration {
-    width: 500px;
+    display: flex;
+    align-self: center;
+    flex: 0 1 500;
+    margin: 0 10px;
+    min-width: 200px;
     height: 20px;
   }
 }
