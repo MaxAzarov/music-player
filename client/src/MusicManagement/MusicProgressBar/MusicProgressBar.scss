@@ -1,5 +1,13 @@
 .music-progress {
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  flex: 0 1 500px;
+  @media screen and (max-width: 600px) {
+    display: flex;
+    flex: 1 1 auto;
+    width: 90%;
+  }
   color: #fff;
   div {
     display: flex;
@@ -7,9 +15,8 @@
   &__duration {
     display: flex;
     align-self: center;
-    flex: 0 1 500;
     margin: 0 10px;
-    min-width: 200px;
+    flex: 0 1 500px;
     height: 20px;
   }
 }

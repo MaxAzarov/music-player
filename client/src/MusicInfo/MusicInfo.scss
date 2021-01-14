@@ -5,9 +5,6 @@
   &__img {
     display: flex;
     max-width: 300px;
-    @media screen and (max-width: 600px) {
-      max-width: 200px;
-    }
   }
   &__title {
     color: #fff;
