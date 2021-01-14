@@ -11,9 +11,9 @@
     "build:server": "webpack --config webpack.config.js",
     "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
     "client": "cd client && cd build && npm run start",
-    "server": "node main.bundle.js",
+    "server": "node server.js",
     "heroku-postbuild": " npm install --prefix client && npm install && npm run build && tsc",
-    "start": "npm run server"
+    "start": "concurrently  \"npm run client\" \"npm run server\""
   },
   "engines": {
     "node": "14.10.1"
