@@ -2,4 +2,3 @@ node_modules
 .vscode
 build
 .DS_Store
-main.bundle.js
