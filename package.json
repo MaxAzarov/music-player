@@ -12,7 +12,7 @@
     "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
     "client": "cd client && cd build && npm run start",
     "server": "node ./dist/server.js",
-    "heroku-postbuild": " npm install --prefix client && npm install && npm run build && tsc",
+    "heroku-postbuild": " npm install --prefix client && npm install && tsc && npm run build:client",
     "start": "concurrently  \"npm run client\" \"npm run server\""
   },
   "engines": {
