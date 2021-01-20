@@ -1,3 +1,4 @@
+///<reference path="interface.d.ts"/>
 import { gql, useMutation, useQuery } from "@apollo/client";
 import React, { useCallback, useEffect, useState } from "react";
 
@@ -5,15 +6,6 @@ import MusicInfo from "../MusicInfo/MusicInfo";
 import MusicManagement from "../MusicManagement/MusicManagement";
 import MusicItem from "./MusicItem/MusicItem";
 import "./Music.scss";
-
-interface IMusic {
-  name: string;
-  author: string;
-  album: string;
-  liked: boolean;
-  link: string;
-  image: string;
-}
 
 const Music = () => {
   const [musics, setMusics] = useState<IMusic[]>([]);
@@ -53,6 +45,10 @@ const Music = () => {
 
   const [toggleLike] = useMutation(ToggleLike);
 
+  /**
+   *
+   * @param name Name of music
+   */
   const setLiked = (name: string) => {
     setMusics((prevState) => {
       prevState = [
@@ -86,7 +82,10 @@ const Music = () => {
 
   const { data, loading } = useQuery(GetMusics);
 
-  const GenerateIndex = useCallback(() => {
+  /**
+   * @returns number
+   */
+  const GenerateIndex = useCallback((): number => {
     return Math.floor(Math.random() * musics.length);
   }, [musics.length]);
 

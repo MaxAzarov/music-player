@@ -11,25 +11,18 @@ interface IMusic {
 
 const resolvers = {
   Query: {
-    GetMusics: async function (_: any, {}) {
+    GetMusics: async function (_: any, {}): Promise<any> {
       const musics = await Music.find({});
-      // console.log(musics);
       return musics;
-    },
-    hello: async function () {
-      return "hello";
     },
   },
   Mutation: {
     AddMusic: async function (
       _: any,
       { name, link, author, album, liked, image }: IMusic
-    ) {
-      console.log("🚀 ~ file: music.ts ~ line 28 ~ name", name);
-
+    ): Promise<IMusic> {
       const music = new Music({ name, link, author, album, liked, image });
       await music.save();
-
       return {
         name,
         link,
@@ -39,9 +32,11 @@ const resolvers = {
         image,
       };
     },
-    ToggleLike: async function (_: any, { name }: { name: string }) {
+    ToggleLike: async function (
+      _: any,
+      { name }: { name: string }
+    ): Promise<string> {
       let music = await Music.findOne({ name });
-      console.log(music);
       music.liked = !music.liked;
       await music.save();
       return "ok";

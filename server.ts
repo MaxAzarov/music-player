@@ -1,27 +1,14 @@
-import express, { Application, Request, Response } from "express";
-import { ApolloServer, gql } from "apollo-server-express";
+import express, { Application } from "express";
+import { ApolloServer } from "apollo-server-express";
 import mongoose from "mongoose";
-import cors from "cors";
-import typeDefs from "./graphql/typeDefs/root";
-import resolvers from "./graphql/resolvers/root";
 import path from "path";
+import cors from "cors";
+
+import typeDefs from "./graphql/typeDefs";
+import resolvers from "./graphql/resolvers";
 
 const app: Application = express();
 const PORT = process.env.PORT || 5000;
-
-// const typeDefs = gql`
-//   type Query {
-//     hello: String!
-//   }
-// `;
-
-// const resolvers = {
-//   Query: {
-//     hello: async function () {
-//       return "hello";
-//     },
-//   },
-// };
 
 const server = new ApolloServer({
   typeDefs,

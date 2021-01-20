@@ -12,7 +12,6 @@ const App = () => {
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "repeat-y",
-        // height: "100vh",
       }}
     >
       <Music />
