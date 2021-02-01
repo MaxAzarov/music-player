@@ -1,25 +1,20 @@
-.music-wrapper {
+.musics {
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-}
-.musics {
-  width: 40%;
-  @media screen and (max-width: 992px) {
-    display: none;
-  }
-}
-.music {
-  display: flex;
-  justify-content: space-evenly;
-  height: 100vh;
-  align-items: center;
-  align-items: center;
-
-  @media screen and (max-width: 992px) {
+  &__wrapper {
     display: flex;
-    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100vh;
+    align-items: center;
+    @media screen and (max-width: 992px) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  &__list {
+    width: 80%;
   }
 }

@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import MusicInfo from "../MusicInfo/MusicInfo";
 import MusicManagement from "../MusicManagement/MusicManagement";
 import MusicItem from "./MusicItem/MusicItem";
+import Spinner from "../Spinner/Spinner";
 import "./Music.scss";
 
 const Music = () => {
@@ -66,14 +67,15 @@ const Music = () => {
 
   const SetMusic = useCallback(
     (index: number) => {
+      const { name, author, album, liked, link, image } = musics[index];
       setActiveMusic({
-        name: musics[index].name,
-        author: musics[index].author,
-        album: musics[index].album,
-        liked: musics[index].liked,
-        link: musics[index].link,
-        image: musics[index].image,
-        index: index,
+        name,
+        author,
+        album,
+        liked,
+        link,
+        image,
+        index,
       });
       setNext(false);
     },
@@ -82,9 +84,6 @@ const Music = () => {
 
   const { data, loading } = useQuery(GetMusics);
 
-  /**
-   * @returns number
-   */
   const GenerateIndex = useCallback((): number => {
     return Math.floor(Math.random() * musics.length);
   }, [musics.length]);
@@ -108,33 +107,25 @@ const Music = () => {
   }, [next, musics, activeMusic.index, shuffle, GenerateIndex, SetMusic]);
 
   return (
-    <div className="music-wrapper">
-      <div className="music">
-        <div className="musics">
-          {musics.map((item, index) => (
-            <MusicItem
-              key={index}
-              index={index}
-              link={item.link}
-              name={item.name}
-              author={item.author}
-              album={item.album}
-              liked={item.liked}
-              image={item.image}
-              setActiveMusic={setActiveMusic}
-              setLiked={setLiked}
-            ></MusicItem>
-          ))}
-        </div>
+    <section className="musics">
+      <div className="musics__wrapper">
+        {musics.length ? (
+          <div className="musics__list">
+            {musics.map((item, index) => (
+              <MusicItem
+                key={index}
+                index={index}
+                music={item}
+                setActiveMusic={setActiveMusic}
+                setLiked={setLiked}
+              />
+            ))}
+          </div>
+        ) : (
+          <Spinner />
+        )}
 
-        <MusicInfo
-          link={activeMusic.image}
-          author={activeMusic.author}
-          album={activeMusic.album}
-          name={activeMusic.name}
-          liked={activeMusic.liked}
-          setLiked={setLiked}
-        />
+        <MusicInfo musicInfo={activeMusic} setLiked={setLiked} />
       </div>
       {activeMusic.link && (
         <MusicManagement
@@ -145,7 +136,7 @@ const Music = () => {
           name={activeMusic.name}
         />
       )}
-    </div>
+    </section>
   );
 };
 export default Music;

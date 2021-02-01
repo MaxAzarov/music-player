@@ -7,14 +7,6 @@
     border-bottom: none;
   }
 
-  @media screen and (max-width: 992px) {
-    display: none;
-    &:first-child {
-      display: flex;
-      border-bottom: none;
-    }
-  }
-
   &__info {
     display: flex;
     flex: 1 1 auto;

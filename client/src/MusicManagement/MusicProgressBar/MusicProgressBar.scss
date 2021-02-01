@@ -12,11 +12,23 @@
   div {
     display: flex;
   }
-  &__duration {
+  &__defaultBar {
     display: flex;
     align-self: center;
     margin: 0 10px;
     flex: 0 1 500px;
-    height: 20px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    z-index: 1;
+  }
+  &__progressbar {
+    width: 0px;
+    background-color: #000;
+    display: block;
+    border-radius: 10px;
+    // display: flex;
+    height: 10px;
+    z-index: 200;
   }
 }

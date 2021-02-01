@@ -1,35 +1,31 @@
-import classNames from "classnames";
 import React from "react";
+import classNames from "classnames";
 
 import "./MusicInfo.scss";
 
 interface Props {
-  link: string;
-  author: string;
-  album: string;
-  name: string;
-  liked: boolean;
+  musicInfo: Partial<IMusic>;
   setLiked: (name: string) => void;
 }
 
-const MusicInfo = ({ link, name, author, album, liked, setLiked }: Props) => {
+const MusicInfo = ({ musicInfo, setLiked }: Props) => {
   const style = classNames({
-    visibility: !link,
+    visibility: !musicInfo.image,
     "music-info": true,
   });
 
   const heart = classNames({
-    opacity: liked,
+    opacity: musicInfo.liked,
   });
 
   return (
     <div className={style}>
-      <img className="music-info__img" src={link} alt="" />
+      <img className="music-info__img" src={musicInfo.image} alt="" />
       <div className="music-info__wrapper">
         <div className="music-info__title">
-          <p>{name}</p>
+          <p>{musicInfo.name}</p>
           <p>
-            {author} • {album}
+            {musicInfo.author} • {musicInfo.album}
           </p>
         </div>
 
@@ -37,7 +33,7 @@ const MusicInfo = ({ link, name, author, album, liked, setLiked }: Props) => {
           <span
             style={{ fontSize: "1.2em", color: "#fff", marginRight: "5px" }}
             className={heart}
-            onClick={() => setLiked(name)}
+            onClick={() => setLiked(musicInfo.name as string)}
           >
             <i className="fas fa-heart"></i>
           </span>

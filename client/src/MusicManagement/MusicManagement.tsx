@@ -27,7 +27,6 @@ const MusicManagement = ({
   setShuffle,
 }: Props) => {
   const [play, setPlay] = useState<boolean>(false);
-  // const [shuffle, setShuffle] = useState<boolean>(true);
   const [timer, setTimer] = useState<number>(0);
   const [loop, setLoop] = useState<boolean>(false);
   const [duration, setDuration] = useState<number>();
@@ -51,6 +50,10 @@ const MusicManagement = ({
     return () => Pause();
   }, [Play, Pause, link]);
 
+  const UpdateTime = (newTime: number) => {
+    audio.currentTime = newTime;
+  };
+
   const shuffleStyle = classNames({
     opacity: !shuffle,
   });
@@ -59,23 +62,17 @@ const MusicManagement = ({
     opacity: !loop,
   });
 
-  audio.onloadedmetadata = function () {
-    // duration of music
-    setDuration(audio.duration);
-    // audio.currentTime = audio.duration - 10;
-  };
+  //  duration of loaded music
+  audio.onloadedmetadata = () => setDuration(audio.duration);
 
   // music play
   audio.ontimeupdate = function () {
     setTimer(audio.currentTime);
-
-    // music is over
-    if (audio.currentTime === audio.duration) {
+    if (audio.ended) {
       // next music
       setPlay(false);
       setNext(true);
     }
-
     // current second and minute of music
     const minutes = Math.floor(audio.currentTime / 60);
     const seconds = Math.floor(audio.currentTime - minutes * 60);
@@ -136,6 +133,7 @@ const MusicManagement = ({
           minutes={minutes}
           seconds={seconds}
           timer={timer}
+          updateTime={UpdateTime}
         />
       )}
 

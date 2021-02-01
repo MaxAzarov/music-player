@@ -4,46 +4,26 @@ import classNames from "classnames";
 import "./MusicItem.scss";
 
 interface Props {
-  name: string;
-  author: string;
-  album: string;
-  liked: boolean;
+  music: IMusic;
   index: number;
-  link: string;
-  image: string;
   setActiveMusic: Dispatch<
     SetStateAction<IMusic & { index: number | undefined }>
   >;
   setLiked: (name: string) => void;
 }
 
-const MusicItem = ({
-  name,
-  author,
-  album,
-  liked,
-  index,
-  link,
-  image,
-  setActiveMusic,
-  setLiked,
-}: Props) => {
+const MusicItem = ({ index, music, setActiveMusic, setLiked }: Props) => {
   const heart = classNames({
-    opacity: !liked,
+    opacity: !music.liked,
   });
 
   return (
     <div
-      className="music-item"
+      className="music__item music-item"
       onClick={() => {
         setActiveMusic((prevState) => ({
           ...prevState,
-          name,
-          author,
-          album,
-          link,
-          image,
-          liked,
+          ...music,
           index: index + 1,
         }));
       }}
@@ -52,9 +32,9 @@ const MusicItem = ({
         <span className="music-item__index">{index + 1}</span>
 
         <div className="music-item__info">
-          <span className="music-item__name">{name}</span>
+          <span className="music-item__name">{music.name}</span>
           <p className="music-item__details">
-            {author}&nbsp;•&nbsp;{album}
+            {music.author}&nbsp;•&nbsp;{music.album}
           </p>
         </div>
       </div>
@@ -63,7 +43,7 @@ const MusicItem = ({
         <span
           style={{ fontSize: "1.2em", color: "#fff", marginRight: "5px" }}
           className={heart}
-          onClick={() => setLiked(name)}
+          onClick={() => setLiked(music.name)}
         >
           <i className="fas fa-heart"></i>
         </span>
