@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 import classNames from "classnames";
 
+import Span from "../../Shared/Span";
 import "./MusicItem.scss";
 
 interface Props {
@@ -19,7 +20,7 @@ const MusicItem = ({ index, music, setActiveMusic, setLiked }: Props) => {
 
   return (
     <div
-      className="music__item music-item"
+      className="music-item"
       onClick={() => {
         setActiveMusic((prevState) => ({
           ...prevState,
@@ -40,17 +41,19 @@ const MusicItem = ({ index, music, setActiveMusic, setLiked }: Props) => {
       </div>
 
       <div className="music-item__icons">
-        <span
-          style={{ fontSize: "1.2em", color: "#fff", marginRight: "5px" }}
+        <Span
           className={heart}
-          onClick={() => setLiked(music.name)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setLiked(music.name);
+          }}
         >
           <i className="fas fa-heart"></i>
-        </span>
+        </Span>
 
-        <span style={{ fontSize: "1.2em", color: "#fff", marginRight: "5px" }}>
+        <Span>
           <i className="fas fa-arrow-circle-right"></i>
-        </span>
+        </Span>
       </div>
     </div>
   );

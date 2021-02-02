@@ -8,8 +8,8 @@ import React, {
 } from "react";
 import classNames from "classnames";
 
-import "./MusicManagement.scss";
 import MusicProgressBar from "./MusicProgressBar/MusicProgressBar";
+import "./MusicManagement.scss";
 
 interface Props {
   link: string;
@@ -66,7 +66,7 @@ const MusicManagement = ({
   audio.onloadedmetadata = () => setDuration(audio.duration);
 
   // music play
-  audio.ontimeupdate = function () {
+  audio.ontimeupdate = () => {
     setTimer(audio.currentTime);
     if (audio.ended) {
       // next music

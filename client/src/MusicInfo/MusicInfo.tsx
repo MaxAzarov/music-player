@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 
+import Span from "../Shared/Span";
 import "./MusicInfo.scss";
 
 interface Props {
@@ -30,13 +31,12 @@ const MusicInfo = ({ musicInfo, setLiked }: Props) => {
         </div>
 
         <div className="music-info__icons">
-          <span
-            style={{ fontSize: "1.2em", color: "#fff", marginRight: "5px" }}
+          <Span
             className={heart}
             onClick={() => setLiked(musicInfo.name as string)}
           >
             <i className="fas fa-heart"></i>
-          </span>
+          </Span>
         </div>
       </div>
     </div>

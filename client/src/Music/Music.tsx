@@ -27,19 +27,6 @@ const Music = () => {
     index: undefined,
   });
 
-  const GetMusics = gql`
-    query {
-      GetMusics {
-        name
-        link
-        author
-        album
-        liked
-        image
-      }
-    }
-  `;
-
   const ToggleLike = gql`
     mutation ToggleLike($name: String!) {
       ToggleLike(name: $name)
@@ -83,6 +70,19 @@ const Music = () => {
     },
     [musics]
   );
+
+  const GetMusics = gql`
+    query {
+      GetMusics {
+        name
+        link
+        author
+        album
+        liked
+        image
+      }
+    }
+  `;
 
   const { data, loading } = useQuery(GetMusics);
 
