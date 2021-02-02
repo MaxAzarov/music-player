@@ -6,12 +6,14 @@ import MusicInfo from "../MusicInfo/MusicInfo";
 import MusicManagement from "../MusicManagement/MusicManagement";
 import MusicItem from "./MusicItem/MusicItem";
 import Spinner from "../Spinner/Spinner";
+import useWindowSize from "../utils/useWindowSize";
 import "./Music.scss";
 
 const Music = () => {
   const [musics, setMusics] = useState<IMusic[]>([]);
   const [next, setNext] = useState<boolean>(false);
   const [shuffle, setShuffle] = useState<boolean>(true);
+  const [windowWidth] = useWindowSize();
 
   const [activeMusic, setActiveMusic] = useState<
     IMusic & { index: number | undefined }
@@ -109,7 +111,25 @@ const Music = () => {
   return (
     <section className="musics">
       <div className="musics__wrapper">
-        {musics.length ? (
+        {windowWidth < 992 &&
+          !activeMusic.name &&
+          (musics ? (
+            <div className="musics__list">
+              {musics.map((item, index) => (
+                <MusicItem
+                  key={index}
+                  index={index}
+                  music={item}
+                  setActiveMusic={setActiveMusic}
+                  setLiked={setLiked}
+                />
+              ))}
+            </div>
+          ) : (
+            <Spinner />
+          ))}
+
+        {windowWidth > 992 && musics && (
           <div className="musics__list">
             {musics.map((item, index) => (
               <MusicItem
@@ -121,8 +141,6 @@ const Music = () => {
               />
             ))}
           </div>
-        ) : (
-          <Spinner />
         )}
 
         <MusicInfo musicInfo={activeMusic} setLiked={setLiked} />

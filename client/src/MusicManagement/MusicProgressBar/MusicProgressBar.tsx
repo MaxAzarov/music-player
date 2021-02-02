@@ -20,18 +20,23 @@ const MusicProgressBar = ({
 }: Props) => {
   const durMinutes = Math.floor(duration / 60);
   const durSeconds = Math.floor(duration - durMinutes * 60);
-  const [width, setWidth] = useState(0); // bar width
+  const [width, setWidth] = useState<number>();
+  const [barWidth, setBarWidth] = useState(0); // bar width
   const barRef = useRef<any>(null);
   const barRef2 = useRef<any>(null);
   useEffect(() => {
-    setWidth(barRef.current.clientWidth);
-  }, [setWidth]);
+    setBarWidth(barRef.current.clientWidth);
+  }, [setBarWidth]);
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const mouseX = e.pageX - barRef.current.offsetLeft;
-    const newTime = (mouseX * duration) / width;
+    const newTime = (mouseX * duration) / barWidth;
     updateTime(newTime);
   };
+
+  useEffect(() => {
+    setWidth((timer * barWidth) / duration);
+  }, [timer, barWidth, duration, setWidth]);
 
   return (
     <div className="music__progress music-progress">
@@ -50,7 +55,7 @@ const MusicProgressBar = ({
           <div
             className="music-progress__progressbar"
             ref={barRef2}
-            style={{ width: (timer * width) / duration }}
+            style={{ width }}
           ></div>
         </div>
         <p>
